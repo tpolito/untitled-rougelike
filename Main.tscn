@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsgjungjfijoi"]
+
+[ext_resource type="PackedScene" uid="uid://bjlrivs1810m8" path="res://scenes/tilemap/TileMap.tscn" id="1_tj8bi"]
+[ext_resource type="PackedScene" uid="uid://vtkb4jd7gga6" path="res://scenes/player/Player.tscn" id="2_rpjjx"]
+
+[node name="Main" type="Node2D"]
+
+[node name="TileMap" parent="." instance=ExtResource("1_tj8bi")]
+position = Vector2(4, 7)
+
+[node name="Player" parent="." instance=ExtResource("2_rpjjx")]
+position = Vector2(608, 322)
+
+[node name="CameraAnchor" parent="Player" index="1"]
+remote_path = NodePath("../../PlayerCamera")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position = Vector2(608, 322)
+zoom = Vector2(3, 3)
+
+[editable path="Player"]
