@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6lpgvuaaodnm"]
+
+[ext_resource type="PackedScene" uid="uid://bvqjpyn4b4hva" path="res://scenes/enemy/Enemy.tscn" id="1_ky8o0"]
+[ext_resource type="Texture2D" uid="uid://cmaec6wud25v8" path="res://assets/slime.png" id="2_07ftw"]
+[ext_resource type="Script" path="res://components/move_towards_player_component.gd" id="3_ivoyw"]
+
+[node name="Slime" instance=ExtResource("1_ky8o0")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_07ftw")
+
+[node name="MoveTowardsPlayerComponent" type="Node" parent="." index="3" node_paths=PackedStringArray("move_component", "actor")]
+script = ExtResource("3_ivoyw")
+move_component = NodePath("../MoveComponent")
+actor = NodePath("..")
