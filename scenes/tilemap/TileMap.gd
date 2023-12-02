@@ -27,9 +27,9 @@ func generate_chunk() -> void:
     for y in range(height):
       # var moist = moisture.get_noise_2d(tile_pos.x - width / 2 + x, tile_pos.y - height / 2 + y)
       var rand = rng.randf_range(0, 100)
-      if rand > 90:
+      if rand > 93:
         set_cell(0, Vector2(x,y), 0, Vector2(biome, TREE))
-      elif rand > 60 and rand < 70:
+      elif rand > 65 and rand < 70:
         set_cell(0, Vector2(x,y), 0, Vector2(biome, GRASS))
       elif rand > 10 and rand < 15:
         set_cell(0, Vector2(x,y), 0, Vector2(biome, BUSH))

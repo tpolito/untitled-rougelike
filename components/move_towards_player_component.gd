@@ -8,6 +8,6 @@ class_name MoveTowardsPlayerComponent
 func _process(delta: float) -> void:
   var player_pos = Helpers.get_player().position
   var target = (player_pos - actor.position).normalized()
-  var movement = target * 35 * delta
+  var movement = target * 550 * delta
 
-  move_component.velocity = movement
+  move_component.direction= movement

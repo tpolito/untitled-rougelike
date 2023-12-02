@@ -1,5 +1,5 @@
-extends Node2D
-class_name Entity
+extends CharacterBody2D
+class_name Enemy
 
 
 # Called when the node enters the scene tree for the first time.

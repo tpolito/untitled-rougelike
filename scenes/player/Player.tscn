@@ -1,16 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://chj7lw3hs80su"]
+[gd_scene load_steps=10 format=3 uid="uid://chj7lw3hs80su"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_425yu"]
 [ext_resource type="Texture2D" uid="uid://eqg7mcsnyd1t" path="res://assets/player_placeholder.png" id="1_j5pae"]
 [ext_resource type="Script" path="res://components/move_component.gd" id="1_wbhel"]
 [ext_resource type="Script" path="res://components/move_input_component.gd" id="3_7fa1p"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rwle"]
+size = Vector2(6, 14)
+
 [sub_resource type="Animation" id="Animation_lng5c"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,7 +29,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -43,7 +46,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:rotation")
+tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -60,8 +63,13 @@ _data = {
 "walk": SubResource("Animation_beehk")
 }
 
-[node name="Player" type="Node2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_425yu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8rwle")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_j5pae")
@@ -69,6 +77,7 @@ texture = ExtResource("1_j5pae")
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "anim_player", "sprite")]
 script = ExtResource("1_wbhel")
 actor = NodePath("..")
+speed = 12.0
 anim_player = NodePath("../AnimationPlayer")
 sprite = NodePath("../Sprite")
 
