@@ -1,22 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvqjpyn4b4hva"]
+[gd_scene load_steps=9 format=3 uid="uid://bvqjpyn4b4hva"]
 
 [ext_resource type="Script" path="res://components/move_component.gd" id="1_tcq15"]
-
-[sub_resource type="Animation" id="Animation_gjsmc"]
-resource_name = "walk"
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -0.139626, 0.0, 0.139626]
-}
+[ext_resource type="Script" path="res://components/hurtbox_component.gd" id="2_rde6p"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="3_yhv87"]
+[ext_resource type="Script" path="res://components/hitbox_component.gd" id="4_6t8iy"]
 
 [sub_resource type="Animation" id="Animation_dvuu1"]
 length = 0.001
@@ -48,6 +35,22 @@ tracks/0/keys = {
 "values": [0.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_gjsmc"]
+resource_name = "walk"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.139626, 0.0, 0.139626]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sffnt"]
 _data = {
 "RESET": SubResource("Animation_dvuu1"),
@@ -63,12 +66,31 @@ collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("anim_player", "sprite")]
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "anim_player", "sprite")]
 script = ExtResource("1_tcq15")
-anim_player = NodePath("")
+actor = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
 sprite = NodePath("../Sprite")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_sffnt")
 }
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("2_rde6p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox_component")]
+script = ExtResource("3_yhv87")
+hurtbox_component = NodePath("../HurtboxComponent")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_6t8iy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

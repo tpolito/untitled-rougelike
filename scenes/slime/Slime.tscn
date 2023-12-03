@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6lpgvuaaodnm"]
+[gd_scene load_steps=8 format=3 uid="uid://c6lpgvuaaodnm"]
 
 [ext_resource type="PackedScene" uid="uid://bvqjpyn4b4hva" path="res://scenes/enemy/Enemy.tscn" id="1_ky8o0"]
 [ext_resource type="Texture2D" uid="uid://cmaec6wud25v8" path="res://assets/slime.png" id="2_07ftw"]
 [ext_resource type="Script" path="res://components/move_towards_player_component.gd" id="3_ivoyw"]
+[ext_resource type="Resource" uid="uid://cajj7hl4cwjsg" path="res://scenes/slime/slime_stats.tres" id="3_uucuv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bmd0u"]
 size = Vector2(8, 5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xu85q"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_epave"]
+radius = 6.0
 
 [node name="Slime" instance=ExtResource("1_ky8o0")]
 
@@ -16,12 +23,16 @@ texture = ExtResource("2_07ftw")
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_bmd0u")
 
-[node name="MoveComponent" parent="." index="2" node_paths=PackedStringArray("actor", "anim_player")]
-actor = NodePath("..")
-speed = 6.0
-anim_player = NodePath("../AnimationPlayer")
+[node name="MoveComponent" parent="." index="2"]
+move_stats = ExtResource("3_uucuv")
 
 [node name="MoveTowardsPlayerComponent" type="Node" parent="." index="3" node_paths=PackedStringArray("move_component", "actor")]
 script = ExtResource("3_ivoyw")
 move_component = NodePath("../MoveComponent")
 actor = NodePath("..")
+
+[node name="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("CircleShape2D_xu85q")
+
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("CircleShape2D_epave")

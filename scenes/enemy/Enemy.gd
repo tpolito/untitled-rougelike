@@ -1,12 +1,11 @@
 extends CharacterBody2D
 class_name Enemy
 
+@onready var hurtbox_component: HurtboxComponent = $HurtboxComponent as HurtboxComponent
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-  pass # Replace with function body.
+  # hurtbox_component.hurt.connect(
+  #   self,
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+  # )
   pass

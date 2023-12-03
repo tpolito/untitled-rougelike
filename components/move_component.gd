@@ -3,8 +3,7 @@ class_name MoveComponent
 
 @export var actor: CharacterBody2D
 @export var direction: Vector2
-# TODO: Move this to a speed component
-@export var speed: float
+@export var move_stats: MoveStats
 @export var anim_player: AnimationPlayer
 @export var sprite: Sprite2D
 
@@ -16,6 +15,5 @@ func _physics_process(_delta: float) -> void:
     anim_player.play("idle")
     pass
   # Move the sprite
-  actor.velocity = direction * speed
+  actor.velocity = direction * move_stats.speed
   actor.move_and_slide()
-
