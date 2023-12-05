@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://chj7lw3hs80su"]
+[gd_scene load_steps=16 format=3 uid="uid://chj7lw3hs80su"]
 
 [ext_resource type="Script" path="res://scenes/player/Player.gd" id="1_425yu"]
 [ext_resource type="Texture2D" uid="uid://eqg7mcsnyd1t" path="res://assets/player_placeholder.png" id="1_j5pae"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://components/flash_component.gd" id="6_xnnqj"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="7_0lfsk"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="8_dbiyb"]
+[ext_resource type="Script" path="res://components/knockback_component.gd" id="9_s1shj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8rwle"]
 size = Vector2(6, 14)
@@ -81,12 +82,13 @@ shape = SubResource("RectangleShape2D_8rwle")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_j5pae")
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "anim_player", "sprite")]
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "anim_player", "sprite", "knockback_component")]
 script = ExtResource("1_wbhel")
 actor = NodePath("..")
 move_stats = ExtResource("4_mip03")
 anim_player = NodePath("../AnimationPlayer")
 sprite = NodePath("../Sprite")
+knockback_component = NodePath("../KnockbackComponent")
 
 [node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
 script = ExtResource("3_7fa1p")
@@ -103,7 +105,7 @@ libraries = {
 script = ExtResource("6_xnnqj")
 color = Color(1, 1, 1, 0)
 sprite = NodePath("../Sprite")
-flash_duration = 0.5
+flash_duration = 0.33
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 collision_layer = 2
@@ -113,6 +115,12 @@ script = ExtResource("7_0lfsk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_k43wd")
 
-[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox_component")]
+[node name="HealthComponent" type="Node" parent="." node_paths=PackedStringArray("hurtbox_component", "flash_component")]
 script = ExtResource("8_dbiyb")
+hurtbox_component = NodePath("../HurtboxComponent")
+flash_component = NodePath("../FlashComponent")
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurtbox_component")]
+script = ExtResource("9_s1shj")
+actor = NodePath("..")
 hurtbox_component = NodePath("../HurtboxComponent")

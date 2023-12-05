@@ -6,6 +6,12 @@ class_name MoveComponent
 @export var move_stats: MoveStats
 @export var anim_player: AnimationPlayer
 @export var sprite: Sprite2D
+@export var knockback_component: KnockbackComponent
+
+var knockback = Vector2.ZERO
+
+func _ready() -> void:
+  knockback_component.knockback.connect(_on_knockback_received)
 
 func _physics_process(_delta: float) -> void:
   if direction.x != 0 or direction.y != 0:
@@ -15,5 +21,9 @@ func _physics_process(_delta: float) -> void:
     anim_player.play("idle")
     pass
   # Move the sprite
-  actor.velocity = direction * move_stats.speed
+  actor.velocity = direction * move_stats.speed + knockback
   actor.move_and_slide()
+  knockback = lerp(knockback, Vector2.ZERO, 0.1)
+
+func _on_knockback_received(knockback_direction: Vector2, amount: float) -> void:
+  knockback = knockback_direction * (amount * amount)

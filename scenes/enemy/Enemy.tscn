@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bvqjpyn4b4hva"]
+[gd_scene load_steps=10 format=3 uid="uid://bvqjpyn4b4hva"]
 
 [ext_resource type="Script" path="res://components/move_component.gd" id="1_tcq15"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="2_rde6p"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_yhv87"]
 [ext_resource type="Script" path="res://components/hitbox_component.gd" id="4_6t8iy"]
+[ext_resource type="Script" path="res://components/knockback_component.gd" id="5_r3prk"]
 
 [sub_resource type="Animation" id="Animation_dvuu1"]
 length = 0.001
@@ -66,11 +67,12 @@ collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "anim_player", "sprite")]
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "anim_player", "sprite", "knockback_component")]
 script = ExtResource("1_tcq15")
 actor = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 sprite = NodePath("../Sprite")
+knockback_component = NodePath("../KnockbackComponent")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -94,3 +96,8 @@ collision_mask = 2
 script = ExtResource("4_6t8iy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+
+[node name="KnockbackComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "hurtbox_component")]
+script = ExtResource("5_r3prk")
+actor = NodePath("..")
+hurtbox_component = NodePath("../HurtboxComponent")
