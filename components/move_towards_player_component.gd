@@ -6,7 +6,7 @@ class_name MoveTowardsPlayerComponent
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-  var player_pos = Helpers.get_player().position
+  var player_pos = Utils.get_player().position
   var target = (player_pos - actor.position).normalized()
   var movement = target * 550 * delta
 

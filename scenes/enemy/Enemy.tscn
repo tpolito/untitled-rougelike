@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bvqjpyn4b4hva"]
+[gd_scene load_steps=11 format=3 uid="uid://bvqjpyn4b4hva"]
 
+[ext_resource type="Script" path="res://scenes/enemy/Enemy.gd" id="1_ijl5v"]
 [ext_resource type="Script" path="res://components/move_component.gd" id="1_tcq15"]
 [ext_resource type="Script" path="res://components/hurtbox_component.gd" id="2_rde6p"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="3_yhv87"]
@@ -62,6 +63,7 @@ _data = {
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 7
+script = ExtResource("1_ijl5v")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 

@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="MoveStats" load_steps=2 format=3 uid="uid://c16t72lproq74"]
+[gd_resource type="Resource" script_class="PlayerStats" load_steps=2 format=3 uid="uid://buoawenyploko"]
 
-[ext_resource type="Script" path="res://components/move_stats.gd" id="1_0cjym"]
+[ext_resource type="Script" path="res://components/player_stats.gd" id="1_l53vf"]
 
 [resource]
-script = ExtResource("1_0cjym")
-speed = 12.0
+script = ExtResource("1_l53vf")
+max_health = 10.0
+speed = 10.0

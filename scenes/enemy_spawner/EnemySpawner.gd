@@ -21,7 +21,7 @@ func _on_spawn_timer_timeout() -> void:
 func spawn_enemies() -> void:
   if debug_should_spawn == false:
     return
-  var player_pos = Helpers.get_player().position
+  var player_pos = Utils.get_player().position
   var enemy_to_spawn = enemies_to_spawn[0]
   var angle = randf() * PI * 2
   var rand_spawn_pos = Vector2(player_pos.x + cos(angle) * spawn_distance, player_pos.y + sin(angle) * spawn_distance)

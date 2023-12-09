@@ -1,21 +1,24 @@
 extends Node
 class_name HealthComponent
 
-@export var max_health = 10
+@export var max_health: int = 10
 @export var hurtbox_component: HurtboxComponent
 @export var flash_component: FlashComponent
 
 signal health_changed(current_health: int)
+signal died
 
-var health = max_health:
+var health:
   set(value):
-    health = clamp(value, 0, max_health) 
+    health = clamp(value, 0, get_parent().stats.max_health) 
     health_changed.emit(health)
     if health == 0:
+      died.emit()
       print('dead')
 
 func _ready() -> void:
   hurtbox_component.damage.connect(_on_hurtbox_damage_taken)
+  health = get_parent().stats.max_health
 
 func _on_hurtbox_damage_taken(hitbox: HitboxComponent) -> void:
   var damage = hitbox.damage

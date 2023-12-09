@@ -22,10 +22,8 @@ func _process(_delta: float) -> void:
   pass
 
 func generate_chunk() -> void:
-  var tile_pos = local_to_map(Vector2(0,0))
   for x in range(width):
     for y in range(height):
-      # var moist = moisture.get_noise_2d(tile_pos.x - width / 2 + x, tile_pos.y - height / 2 + y)
       var rand = rng.randf_range(0, 100)
       if rand > 93:
         set_cell(0, Vector2(x,y), 0, Vector2(biome, TREE))

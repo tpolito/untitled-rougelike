@@ -1,10 +1,10 @@
 extends CharacterBody2D
 class_name Player
 
-func _ready() -> void:
-  pass
+@export var stats: PlayerStats
+@onready var move_component: MoveComponent = $MoveComponent as MoveComponent
+@onready var health_component: HealthComponent = $HealthComponent as HealthComponent
 
-func _input(event): 
-  if event is InputEventKey:
-    if event.pressed and event.keycode == 80:
-      $FlashComponent.flash()
+func _ready() -> void: 
+  print('Player')
+  # print(stats)
