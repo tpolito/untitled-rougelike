@@ -6,5 +6,5 @@ class_name Player
 @onready var health_component: HealthComponent = $HealthComponent as HealthComponent
 
 func _ready() -> void: 
-  print('Player')
+  pass
   # print(stats)

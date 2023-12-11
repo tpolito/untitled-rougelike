@@ -7,8 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_i4o1y"]
 script = ExtResource("2_cktju")
-max_health = 8.0
-speed = 8.0
+max_health = 1.0
+speed = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bmd0u"]
 size = Vector2(8, 5)
